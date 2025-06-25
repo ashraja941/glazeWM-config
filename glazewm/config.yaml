@@ -121,9 +121,21 @@ window_behavior:
 
 workspaces:
   - name: '1'
+    display_name: "\uf36f"
+    bind_to_monitor: 0
+    keep_alive: true
   - name: '2'
+    display_name: "\uf120"
+    bind_to_monitor: 0
+    keep_alive: true
   - name: '3'
+    display_name: "\uf268"
+    bind_to_monitor: 0
+    keep_alive: true
   - name: '4'
+    display_name: "\ueef6"
+    bind_to_monitor: 0
+    keep_alive: true
   - name: '5'
   - name: '6'
   - name: '7'
