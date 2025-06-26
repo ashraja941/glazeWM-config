@@ -79,9 +79,15 @@ function App() {
             <div className="left">
                 <div className="box">
                     <div className="logo">
-                        <i className="nf nf-custom-windows"></i>
-                        {/* {output.host?.hostname} | {output.host?.friendlyOsVersion} */}
-                        {output.host?.hostname} |
+                        {/* Show 'Ash' as the host name, then workspace displayName */}
+                        {"Ash"}
+                        {output.glazewm && output.glazewm.focusedWorkspace ? (
+                            <>
+                                {" | "}
+                                {output.glazewm.focusedWorkspace.displayName || output.glazewm.focusedWorkspace.name}
+                            </>
+                        ) : null}
+                        {" |"}
                     </div>
                     {output.glazewm && (
                         <div className="workspaces">
@@ -95,7 +101,7 @@ function App() {
                                     }
                                     key={workspace.name}
                                 >
-                                    {workspace.displayName ?? workspace.name}
+                                    {workspace.name}
                                 </button>
                             ))}
                         </div>
