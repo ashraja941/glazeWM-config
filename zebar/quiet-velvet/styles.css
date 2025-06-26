@@ -23,7 +23,7 @@ i {
 body {
     color: var(--font-color);
     /* Use FiraCode Nerd Font as the main font */
-    font-family: "FiraCode Nerd Font", monospace;
+    font-family: "Hack Nerd Font", monospace;
     font-size: 12px;
     overflow: hidden;
 }

@@ -50,21 +50,8 @@ const SpotifyWidget = () => {
                 style={style}>
 
             {showSettings && !['fetching...', 'Error', ''].includes(song) ?
-                <div style={settingsStyle}>
-                    <button className="nf nf-md-skip_previous clean-button" style={iconStyle} onClick={async () => {
-                        await spotifyUtils.previousSong();
-                        setTimeout(async () => await updateSong(), 1000);
-                    }}></button>
-                    <button className="nf nf-md-play_pause clean-button" style={iconStyle} onClick={async () => {
-                        await spotifyUtils.playPause();
-                        setTimeout(async () => await updateSong(), 1000);
-                    }}></button>
-                    <button className="nf nf-md-skip_next clean-button" style={iconStyle} onClick={async () => {
-                        await spotifyUtils.skipSong();
-                        setTimeout(async () => await updateSong(), 1000);
-                    }}></button>
-                </div>
-                : null}
+                null
+            : null}
         </button>
     );
 }

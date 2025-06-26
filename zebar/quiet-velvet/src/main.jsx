@@ -1,9 +1,6 @@
 import React, { Children, useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import * as zebar from 'zebar';
-import SpotifyWidget from "./components/SpotifyWidget.jsx";
-import GoogleSearch from "./components/GoogleSearch.jsx";
-import Settings from "./components/Settings.jsx";
 import Shortcut from "./components/Shortcut";
 import ActiveApp from './components/ActiveApp.jsx';
 import config from "./config.js";
@@ -24,7 +21,6 @@ createRoot(document.getElementById('root')).render(<App/>);
 
 function App() {
     const [output, setOutput] = useState(providers.outputMap);
-    const [showSpotifyWidget, setShowSpotifyWidget] = useState(true);
     const [showGoogleSearch, setShowGoogleSearch] = useState(true);
     const [showShortcuts, setShowShortcuts] = useState(true);
     const [ShowActiveApp, setShowActiveApp] = useState(true);
@@ -113,7 +109,6 @@ function App() {
 
             <div className="center">
                 <div className="box">
-                    {showSpotifyWidget ? <SpotifyWidget/> : null}
                     <i className="nf nf-md-calendar_month"></i>
                     <button className="clean-button" onMouseEnter={() => {
                         setDateFormat('ddd DD MMM hh:mm A')
@@ -127,8 +122,6 @@ function App() {
             </div>
 
             <div className="right">
-                {showGoogleSearch && output.glazewm ? <GoogleSearch
-                    commandRunner={output.glazewm.runCommand} explorerPath={config.explorerPath}/> : null}
                 <div className="box">
                     {output.glazewm && (
                         <>
