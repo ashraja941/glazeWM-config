@@ -97,16 +97,18 @@ body,
     border-radius: 1.9px;
     cursor: pointer;
     transition: all 0.3s, transform 0.3s;
+}
 
-    &.displayed {
-        background: rgb(255 255 255 / 15%) !important;
-    }
+.workspace.displayed {
+    background: rgb(255 255 255 / 15%) !important;
+}
 
-    &.focused,
-    &:hover {
-        background: var(--main-color);
-        transform: scale(0.9);
-    }
+.workspace.focused,
+.workspace:focus,
+.workspace:hover {
+    background: var(--main-color) !important;
+    color: #fff !important;
+    transform: scale(0.9);
 }
 
 .binding-mode,
