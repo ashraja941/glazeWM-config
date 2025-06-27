@@ -7,3 +7,4 @@ Error: The operation was canceled by the user. (0x800704C7)
 [2m2025-06-12T04:14:04.391199Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Workspace with name '4' doesn't exist or is already active.
 [2m2025-06-13T07:16:57.324799Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Invalid window handle. (0x80070578)
 [2m2025-06-19T03:51:39.729199Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Access is denied. (0x80070005)
+[2m2025-06-27T01:03:13.586875Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_effects.focused_window.border: Color must start with a `#`. at line 62 column 7
