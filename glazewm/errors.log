@@ -8,3 +8,6 @@ Error: The operation was canceled by the user. (0x800704C7)
 [2m2025-06-13T07:16:57.324799Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Invalid window handle. (0x80070578)
 [2m2025-06-19T03:51:39.729199Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Access is denied. (0x80070005)
 [2m2025-06-27T01:03:13.586875Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m window_effects.focused_window.border: Color must start with a `#`. at line 62 column 7
+[2m2025-06-27T22:00:37.153371Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m found invalid Unicode character escape code at line 146 column 22, while parsing a quoted scalar at line 146 column 19
+[2m2025-06-27T22:00:44.633473Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m found invalid Unicode character escape code at line 146 column 22, while parsing a quoted scalar at line 146 column 19
+[2m2025-07-01T20:38:00.962523Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
