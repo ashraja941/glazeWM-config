@@ -11,3 +11,41 @@ Error: The operation was canceled by the user. (0x800704C7)
 [2m2025-06-27T22:00:37.153371Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m found invalid Unicode character escape code at line 146 column 22, while parsing a quoted scalar at line 146 column 19
 [2m2025-06-27T22:00:44.633473Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m found invalid Unicode character escape code at line 146 column 22, while parsing a quoted scalar at line 146 column 19
 [2m2025-07-01T20:38:00.962523Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-07-19T14:10:53.963309Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-07-19T21:13:25.439730Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-07-19T21:13:32.433844Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-07-19T21:13:35.492797Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-07-27T22:30:53.843423Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-07-28T15:32:09.720107Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-08-02T17:06:10.304987Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-08-05T15:19:15.209169Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-08-16T11:31:50.284618Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-08-18T15:33:42.045021Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-08-18T15:35:44.543855Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-09-18T20:58:37.862206Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m No common ancestor between containers.
+[2m2025-09-18T20:58:39.648019Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:41.023291Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:41.710568Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:42.203091Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:43.289389Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:43.764890Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:43.956536Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:44.118100Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:46.504879Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:48.408464Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:48.725561Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:48.904175Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:49.061197Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:49.704551Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:49.840168Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:50.023602Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:50.197965Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:51.042020Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:51.275769Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:51.490980Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:58:59.691950Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:59:01.257549Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:59:02.020236Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:59:02.229191Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-18T20:59:13.383741Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
+[2m2025-09-25T23:52:30.183740Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
