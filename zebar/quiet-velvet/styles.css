@@ -38,6 +38,9 @@ body,
     background: transparent;
 }
 
+.icon {
+  font-family: 'FiraCode Nerd Font Propo', sans-serif;
+}
 
 .app {
     display: grid;
