@@ -49,3 +49,8 @@ Error: The operation was canceled by the user. (0x800704C7)
 [2m2025-09-18T20:59:02.229191Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
 [2m2025-09-18T20:59:13.383741Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Window has no workspace.
 [2m2025-09-25T23:52:30.183740Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
+[2m2025-09-27T20:00:13.383927Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Invalid monitor handle. (0x800705B5)
+[2m2025-09-27T20:00:28.109863Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-09-27T20:00:29.410948Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-09-27T20:00:31.128814Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m channel closed
+[2m2025-10-07T14:59:45.072556Z[0m [31mERROR[0m [2mglazewm[0m[2m:[0m Another instance of the application is already running.
