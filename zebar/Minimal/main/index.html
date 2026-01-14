@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Custom styles. -->
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+
+    <!-- Allows React to be run buildless via "text/babel" script below. -->
+    <script
+      src="https://unpkg.com/@babel/standalone@7.25.6/babel.min.js"
+      integrity="sha256-aS0B0wnsaDByLfE16h4MDCP1fQFccysd1YWOcV+gbBo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel" data-type="module">
+      import React, { Children, useEffect, useState } from 'https://esm.sh/react@18?dev';
+      import { createRoot } from 'https://esm.sh/react-dom@18/client?dev';
+      import * as zebar from 'https://esm.sh/zebar@3.0';
+      import moment from "https://esm.sh/moment";
+
+      // =========================================================================================
+      // === CONFIGURATION                                                                     ===
+      // ===                                                                                   ===
+      // === Tweak the values in this section to easily customize the bar.                     ===
+      // =========================================================================================
+      const CONFIG = {
+        // Your username, displayed in the top-left.
+        username: "Ash",
+
+        // Date and time formats.
+        // "short" is the default format.
+        // "long" is shown when you hover over the date.
+        // See Moment.js formatting options for syntax: https://momentjs.com/docs/#/displaying/format/
+        dateFormat: {
+          short: 'hh:mm A',
+          long: 'ddd DD MMM hh:mm A'
+        },
+
+        // Which components to show by default.
+        show: {
+          shortcuts: true,
+          activeApp: true
+        },
+
+        // Spotify API keys.
+        // You can get these from https://developer.spotify.com/dashboard/applications
+        spotify: {
+          refreshToken: '',
+          clientId: '',
+          clientSecret: '',
+        }
+      };
+      // =========================================================================================
+      // === END OF CONFIGURATION                                                              ===
+      // =========================================================================================
+
+
+      // --- Spotify Utils ---
+      const spotifyUtils = (() => {
+          const updateAccessToken = async () => {
+              if (!CONFIG.spotify.refreshToken || !CONFIG.spotify.clientId || !CONFIG.spotify.clientSecret) {
+                  console.error("Missing required Spotify keys in CONFIG object for refreshing access token.");
+                  return;
+              }
+              const url = "https://accounts.spotify.com/api/token";
+              const payload = {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                  body: new URLSearchParams({
+                      grant_type: 'refresh_token',
+                      refresh_token: CONFIG.spotify.refreshToken,
+                      client_id: CONFIG.spotify.clientId,
+                      client_secret: CONFIG.spotify.clientSecret,
+                  }).toString(),
+              };
+
+              try {
+                  const response = await fetch(url, payload);
+                  if (!response.ok) {
+                      console.error(`HTTP error! status: ${response.status}`);
+                      console.error(await response.text());
+                      return;
+                  }
+                  const data = await response.json();
+                  if (data.access_token) {
+                      localStorage.setItem('access_token', data.access_token);
+                  } else {
+                      console.error("Invalid response data from Spotify", data);
+                  }
+              } catch (e) {
+                  console.error("Failed to update Spotify access token", e);
+              }
+          };
+
+          const fetchSpotifyApi = async (path, options) => {
+              const accessToken = localStorage.getItem('access_token');
+              if (!accessToken) {
+                  console.error("Spotify access token not found in local storage.");
+                  return;
+              }
+              const url = `https://api.spotify.com/v1${path}`;
+              const payload = {
+                  ...options,
+                  headers: { ...options.headers, 'Authorization': 'Bearer ' + accessToken },
+              };
+              try {
+                  const response = await fetch(url, payload);
+                  if (response.status === 401) { // Token expired
+                      await updateAccessToken();
+                      return fetchSpotifyApi(path, options); // Retry after refresh
+                  }
+                  if (!response.ok) {
+                      console.error(`HTTP error! status: ${response.status}`);
+                      console.error(await response.text());
+                      return;
+                  }
+                  if (response.status === 204) { return { is_playing: false }; }
+                  return await response.json();
+              } catch (e) {
+                  console.error("Failed to fetch from Spotify API", e);
+                  throw e;
+              }
+          }
+
+          const postSpotifyApi = async (path) => { /* ... implementation ... */ };
+          const putSpotifyApi = async (path) => { /* ... implementation ... */ };
+
+          const getCurrentSong = async () => {
+              try {
+                  const result = await fetchSpotifyApi('/me/player/currently-playing', { method: 'GET' });
+                  return result && result.is_playing ? result.item.name : "---";
+              } catch (e) { return "Error"; }
+          };
+          
+          return { getCurrentSong };
+      })();
+
+      // --- Components ---
+      const ActiveApp = ({ output }) => {
+          function getAppIcon(appId) {
+              if (/spotify/i.test(appId)) { return <i className="nf nf-md-spotify"></i>; }
+              else if (/msedge|edge/i.test(appId)) { return <i className="nf nf-md-web"></i>; }
+              else if (/code|vscode|visual studio/i.test(appId)) { return <i className="nf nf-dev-visualstudio"></i>; }
+              else if (/obs/i.test(appId)) { return <i className="nf nf-fa-video_camera"></i>; }
+              else if (/zoom/i.test(appId)) { return <i className="nf nf-md-video"></i>; }
+              else if (/telegram/i.test(appId)) { return <i className="nf nf-md-telegram"></i>; }
+              else if (/whatsapp/i.test(appId)) { return <i className="nf nf-md-whatsapp"></i>; }
+              else if (/steam/i.test(appId)) { return <i className="nf nf-md-steam"></i>; }
+              else if (/minecraft/i.test(appId)) { return <i className="nf nf-fa-cube"></i>; }
+              else if (/terminal|powershell/i.test(appId)) { return <i className="nf nf-oct-terminal"></i>; }
+              else if (/file explorer|explorer/i.test(appId)) { return <i className="nf nf-fa-folder_open"></i>; }
+              else if (/chrome/i.test(appId)) { return <i className="nf nf-fa-chrome"></i>; }
+              else if (/firefox/i.test(appId)) { return <i className="nf nf-fa-firefox"></i>; }
+              else if (/discord/i.test(appId)) { return <i className="nf nf-md-discord"></i>; }
+              else if (/notepad\+\+/i.test(appId)) { return <i className="nf nf-md-note_text"></i>; }
+              else if (/photoshop/i.test(appId)) { return <i className="nf nf-dev-photoshop"></i>; }
+              else if (/illustrator/i.test(appId)) { return <i className="nf nf-dev-illustrator"></i>; }
+              else if (/excel/i.test(appId)) { return <i className="nf nf-md-microsoft_excel"></i>; }
+              else if (/word/i.test(appId)) { return <i className="nf nf-md-microsoft_word"></i>; }
+              else if (/powerpoint/i.test(appId)) { return <i className="nf nf-md-microsoft_powerpoint"></i>; }
+              else { return <i className="nf nf-md-application"></i>; }
+          }
+          return (
+              <div className='active-app'>
+                  {output.glazewm?.focusedWorkspace && (
+                      <div className="active-app-icons">
+                          {output.glazewm.focusedWorkspace.children.map((child) => (
+                              <span key={child.id} className="app-icon">{getAppIcon(child.processName)}</span>
+                          ))}
+                      </div>
+                  )}
+              </div>
+          );
+      };
+
+      const SpotifyWidget = () => {
+          const [song, setSong] = useState('fetching...');
+          useEffect(() => {
+              let intervalId;
+              const updateSong = async () => setSong(await spotifyUtils.getCurrentSong());
+              const updateAndSetInterval = async () => {
+                  await updateSong();
+                  intervalId = setInterval(updateSong, 10000);
+              };
+              updateAndSetInterval();
+              return () => clearInterval(intervalId);
+          }, []);
+          if (!CONFIG.spotify.clientId) return null; // Don't render if spotify isn't configured
+          return (
+              <div className="spotify">
+                  <i className="nf nf-md-spotify"></i>
+                  {song}
+              </div>
+          );
+      }
+      
+      // --- Main App ---
+      const providers = zebar.createProviderGroup({
+          keyboard: { type: 'keyboard' },
+          glazewm: { type: 'glazewm' },
+          cpu: { type: 'cpu' },
+          date: { type: 'date', formatting: 'EEE d MMM t' },
+          battery: { type: 'battery' },
+          memory: { type: 'memory' },
+          weather: { type: 'weather' },
+          host: { type: 'host' }
+      });
+
+      function App() {
+          const [output, setOutput] = useState(providers.outputMap);
+          const [dateFormat, setDateFormat] = useState(CONFIG.dateFormat.short);
+
+          useEffect(() => {
+              const unsub = providers.onOutput(() => setOutput(providers.outputMap));
+              return () => unsub();
+          }, []);
+
+          function getBatteryIcon(batteryOutput) {
+              if(!batteryOutput) return null;
+              if (batteryOutput.chargePercent > 90) return <i className="nf nf-fa-battery_4"></i>;
+              if (batteryOutput.chargePercent > 70) return <i className="nf nf-fa-battery_3"></i>;
+              if (batteryOutput.chargePercent > 40) return <i className="nf nf-fa-battery_2"></i>;
+              if (batteryOutput.chargePercent > 20) return <i className="nf nf-fa-battery_1"></i>;
+              return <i className="nf nf-fa-battery_0"></i>;
+          }
+
+          function getWeatherIcon(weatherOutput) {
+              if(!weatherOutput) return null;
+              switch (weatherOutput.status) {
+                  case 'clear_day': return <i className="nf nf-weather-day_sunny"></i>;
+                  case 'clear_night': return <i className="nf nf-weather-night_clear"></i>;
+                  default: return <i className="nf nf-weather-cloudy"></i>;
+              }
+          }
+
+          return (
+              <div className="app">
+                  <div className="left">
+                      <div className="box">
+                          <div className="logo">
+                              {CONFIG.username}
+                              {output.glazewm?.focusedWorkspace && ` | ${output.glazewm.focusedWorkspace.displayName || output.glazewm.focusedWorkspace.name}`}
+                              {" |"}
+                          </div>
+                          {output.glazewm && (
+                              <div className="workspaces">
+                                  {output.glazewm.currentWorkspaces.map(ws => (
+                                      <button
+                                          className={`workspace ${ws.hasFocus && 'focused'} ${ws.isDisplayed && 'displayed'}`}
+                                          onClick={() => output.glazewm.runCommand(`focus --workspace ${ws.name}`)}
+                                          key={ws.name}
+                                      >{ws.name}</button>
+                                  ))}
+                              </div>
+                          )}
+                      </div>
+                  </div>
+
+                  <div className="center">
+                      <div className="box">
+                          <i className="nf nf-md-calendar_month"></i>
+                          <button 
+                            className="clean-button" 
+                            onMouseEnter={() => setDateFormat(CONFIG.dateFormat.long)} 
+                            onMouseLeave={() => setDateFormat(CONFIG.dateFormat.short)}>
+                              {moment(output.date?.now).format(dateFormat)}
+                          </button>
+                          {CONFIG.show.activeApp && output.glazewm ? <ActiveApp output={output} /> : null}
+                      </div>
+                  </div>
+
+                  <div className="right">
+                      <div className="box">
+                          {output.glazewm && (
+                              <>
+                                  {output.glazewm.bindingModes.map(bm => <button className="binding-mode" key={bm.name}>{bm.displayName??bm.name}</button>)}
+                                  <button
+                                      className={`tiling-direction nf ${output.glazewm.tilingDirection === 'horizontal' ? 'nf-md-swap_horizontal' : 'nf-md-swap_vertical'}`}
+                                      onClick={() => output.glazewm.runCommand('toggle-tiling-direction')}
+                                  ></button>
+                              </>
+                          )}
+                          <SpotifyWidget />
+                          {output.memory && (
+                              <button className="memory clean-button" onClick={() => output.glazewm.runCommand('shell-exec taskmgr')}>
+                                  <i className="nf nf-fae-chip"></i>{Math.round(output.memory.usage)}%
+                              </button>
+                          )}
+                          {output.cpu && (
+                              <button className="cpu clean-button" onClick={() => output.glazewm.runCommand('shell-exec taskmgr')}>
+                                  <i className="nf nf-oct-cpu"></i>
+                                  <span className={output.cpu.usage > 85 ? 'high-usage' : ''}>{Math.round(output.cpu.usage)}%</span>
+                              </button>
+                          )}
+                          {output.battery && (
+                              <div className="battery">
+                                  {output.battery.isCharging && (<i className="nf nf-md-power_plug charging-icon"></i>)}
+                                  {getBatteryIcon(output.battery)}
+                                  {Math.round(output.battery.chargePercent)}%
+                              </div>
+                          )}
+                          {output.weather && (
+                              <div className="weather">
+                                  {getWeatherIcon(output.weather)}
+                                  {output.weather.celsiusTemp ? `${Math.round(output.weather.celsiusTemp)}°C` : ''}
+                              </div>
+                          )}
+                      </div>
+                  </div>
+              </div>
+          );
+      }
+
+      createRoot(document.getElementById('root')).render(<App/>);
+
+    </script>
+  </body>
+</html>
