@@ -29,9 +29,6 @@
       // === Tweak the values in this section to easily customize the bar.                     ===
       // =========================================================================================
       const CONFIG = {
-        // Your username, displayed in the top-left.
-        username: "Ash",
-
         // Date and time formats.
         // "short" is the default format.
         // "long" is shown when you hover over the date.
@@ -243,9 +240,7 @@
                   <div className="left">
                       <div className="box">
                           <div className="logo">
-                              {CONFIG.username}
-                              {output.glazewm?.focusedWorkspace && ` | ${output.glazewm.focusedWorkspace.displayName || output.glazewm.focusedWorkspace.name}`}
-                              {" |"}
+                              {output.glazewm?.focusedWorkspace && `${output.glazewm.focusedWorkspace.displayName || output.glazewm.focusedWorkspace.name} |`}
                           </div>
                           {output.glazewm && (
                               <div className="workspaces">

@@ -5,11 +5,11 @@
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
 :root {
-    --main-color: rgba(1, 121, 111, 0.95);
+    --main-color: #006060;
     /* --main-color: rgba(122, 80, 229, 0.95); */
     --background-color: linear-gradient(rgba(0, 0, 0, 0.50), rgba(14, 2, 20, 0.45));
     /* --background-color: linear-gradient(rgba(0, 0, 0, 0.90), rgba(14, 2, 20, 0.85)); */
-    --font-color: rgba(255, 255, 255, 0.9);
+    --font-color: #A9A9A9;
     user-select: none;
 }
 
@@ -84,7 +84,6 @@ body,
 }
 
 .logo {
-    gap: 0.25vw;
     margin-right: 10px !important;
 }
 
