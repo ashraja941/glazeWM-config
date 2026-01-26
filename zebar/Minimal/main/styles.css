@@ -5,9 +5,9 @@
 @import "https://www.nerdfonts.com/assets/css/webfont.css";
 
 :root {
-    --main-color: #006060;
+    --main-color: #483D8B;
     /* --main-color: rgba(122, 80, 229, 0.95); */
-    --background-color: linear-gradient(rgba(0, 0, 0, 0.50), rgba(14, 2, 20, 0.45));
+    --background-color: linear-gradient(rgba(48, 25, 52, 0.50), rgba(20, 2, 20, 0.45));
     /* --background-color: linear-gradient(rgba(0, 0, 0, 0.90), rgba(14, 2, 20, 0.85)); */
     --font-color: #A9A9A9;
     user-select: none;
